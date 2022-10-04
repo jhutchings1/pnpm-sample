@@ -1,0 +1,25 @@
+name: SBOM upload
+
+on: 
+  workflow_dispatch:
+  push: 
+    branches: ["main"]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Generate SBOM
+      run: | 
+        curl -Lo $RUNNER_TEMP/sbom-tool https://github.com/microsoft/sbom-tool/releases/latest/download/sbom-tool-linux-x64
+        chmod +x $RUNNER_TEMP/sbom-tool
+        $RUNNER_TEMP/sbom-tool generate -b . -bc . -pn {{ github.repository }} -pv 1.0.0 -ps OwnerName -nsb https://sbom.mycompany.com -V Verbose
+
+    - name: SBOM upload 
+      uses: evryfs/sbom-dependency-submission-action@v0.0.10
+      with:
+        # Path to SBOM files, separated by whitespace
+        sbom-files: "_manifest/manifest.spdx.json"
