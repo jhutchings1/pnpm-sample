@@ -21,7 +21,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: sbom
-        path: /tmp/*
+        path: /tmp/ScanManifest*
     - name: SBOM upload 
       uses: evryfs/sbom-dependency-submission-action@v0.0.10
       with:
