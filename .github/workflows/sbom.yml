@@ -23,7 +23,6 @@ jobs:
         name: sbom
         path: /tmp/ScanManifest*
     - name: SBOM upload 
-      uses: evryfs/sbom-dependency-submission-action@v0.0.10
+      uses: jhutchings1/spdx-to-dependency-graph-action@draft
       with:
-        # Path to SBOM files, separated by whitespace
-        sbom-files: "_manifest/spdx_2.2/manifest.spdx.json"
+        filePath: "_manifest/spdx_2.2/"
