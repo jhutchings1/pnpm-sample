@@ -24,7 +24,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: sbom
-        path: /tmp/ScanManifest*
+        path: _manifest/spdx_2.2
     - name: SBOM upload 
       uses: jhutchings1/spdx-to-dependency-graph-action@draft
       with:
